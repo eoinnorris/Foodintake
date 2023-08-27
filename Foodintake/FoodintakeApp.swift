@@ -13,7 +13,7 @@ struct FoodintakeApp: App {
 
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            OverView()
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)
         }
     }

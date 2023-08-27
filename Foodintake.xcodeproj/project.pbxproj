@@ -16,6 +16,9 @@
 		A9DCA7412A9251B000B6CC1B /* FoodintakeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DCA7402A9251B000B6CC1B /* FoodintakeTests.swift */; };
 		A9DCA74B2A9251B000B6CC1B /* FoodintakeUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DCA74A2A9251B000B6CC1B /* FoodintakeUITests.swift */; };
 		A9DCA74D2A9251B000B6CC1B /* FoodintakeUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DCA74C2A9251B000B6CC1B /* FoodintakeUITestsLaunchTests.swift */; };
+		A9DCA75A2A92526E00B6CC1B /* OverView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DCA7592A92526D00B6CC1B /* OverView.swift */; };
+		A9DCA75C2A9267AA00B6CC1B /* DateHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DCA75B2A9267AA00B6CC1B /* DateHelper.swift */; };
+		A9DCA75E2A9277FF00B6CC1B /* MealsDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DCA75D2A9277FF00B6CC1B /* MealsDefaults.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,6 +51,9 @@
 		A9DCA7462A9251B000B6CC1B /* FoodintakeUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FoodintakeUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A9DCA74A2A9251B000B6CC1B /* FoodintakeUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodintakeUITests.swift; sourceTree = "<group>"; };
 		A9DCA74C2A9251B000B6CC1B /* FoodintakeUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodintakeUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		A9DCA7592A92526D00B6CC1B /* OverView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverView.swift; sourceTree = "<group>"; };
+		A9DCA75B2A9267AA00B6CC1B /* DateHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateHelper.swift; sourceTree = "<group>"; };
+		A9DCA75D2A9277FF00B6CC1B /* MealsDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealsDefaults.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -100,6 +106,9 @@
 			children = (
 				A9DCA72A2A9251AE00B6CC1B /* FoodintakeApp.swift */,
 				A9DCA72C2A9251AE00B6CC1B /* ContentView.swift */,
+				A9DCA7592A92526D00B6CC1B /* OverView.swift */,
+				A9DCA75D2A9277FF00B6CC1B /* MealsDefaults.swift */,
+				A9DCA75B2A9267AA00B6CC1B /* DateHelper.swift */,
 				A9DCA72E2A9251B000B6CC1B /* Assets.xcassets */,
 				A9DCA7332A9251B000B6CC1B /* Persistence.swift */,
 				A9DCA7352A9251B000B6CC1B /* Foodintake.xcdatamodeld */,
@@ -265,6 +274,9 @@
 			files = (
 				A9DCA7342A9251B000B6CC1B /* Persistence.swift in Sources */,
 				A9DCA72D2A9251AE00B6CC1B /* ContentView.swift in Sources */,
+				A9DCA75E2A9277FF00B6CC1B /* MealsDefaults.swift in Sources */,
+				A9DCA75A2A92526E00B6CC1B /* OverView.swift in Sources */,
+				A9DCA75C2A9267AA00B6CC1B /* DateHelper.swift in Sources */,
 				A9DCA72B2A9251AE00B6CC1B /* FoodintakeApp.swift in Sources */,
 				A9DCA7372A9251B000B6CC1B /* Foodintake.xcdatamodeld in Sources */,
 			);
