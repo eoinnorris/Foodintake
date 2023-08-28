@@ -119,8 +119,37 @@ struct UILayout {
     static let horizontalTileHeight = 65.0
 }
 
+
+struct ChartView: View {
+    
+    @Environment(\.presentationMode) var presentationMode
+    
+    var body: some View {
+        VStack {
+            Text("Chart View")
+                .font(.headline)
+        }
+    }
+}
+
+
+struct SettingsView: View {
+    
+    @Environment(\.presentationMode) var presentationMode
+    
+    var body: some View {
+        VStack {
+            Text("Settings View")
+                .font(.headline)
+        }
+    }
+}
+
+
+
 struct OverView: View {
     @Environment(\.managedObjectContext) private var viewContext
+    @State private var showingPopover = false
     
     @FetchRequest(
         sortDescriptors: [NSSortDescriptor(keyPath: \Meal.time, ascending: false)],
@@ -139,6 +168,19 @@ struct OverView: View {
             Spacer()
             Text(lastUpdatedText)
                 .padding(.bottom, 8)
+        }.popover(isPresented: $showingPopover, content: {
+            SettingsView()
+        })
+        
+        .toolbar {
+            /// Cancel  button
+            ToolbarItem(placement: .navigationBarTrailing) {
+                Button {
+                    showingPopover = true
+                } label: {
+                    Image(systemName: "gearshape")
+                }
+            }
         }
     }
     

@@ -13,8 +13,19 @@ struct FoodintakeApp: App {
 
     var body: some Scene {
         WindowGroup {
-            OverView()
-                .environment(\.managedObjectContext, persistenceController.container.viewContext)
+            NavigationStack {
+            TabView {
+                    OverView()
+                        .tabItem {
+                            Label("Today", systemImage: "calendar.day.timeline.left")
+                        }
+                    ChartView()
+                        .tabItem {
+                            Label("Charts", systemImage: "chart.xyaxis.line")
+                        }
+                }
+            }
+            .environment(\.managedObjectContext, persistenceController.container.viewContext)
         }
     }
 }
