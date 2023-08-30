@@ -15,7 +15,7 @@ struct FoodintakeApp: App {
         WindowGroup {
             NavigationStack {
             TabView {
-                    OverView()
+                    DailyView()
                         .tabItem {
                             Label("Today", systemImage: "calendar.day.timeline.left")
                         }

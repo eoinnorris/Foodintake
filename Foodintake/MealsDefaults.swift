@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum MealType:String, CaseIterable {
+enum DefaultMealTypeEnum:String, CaseIterable {
     case bread
     case fruit
     case meal
