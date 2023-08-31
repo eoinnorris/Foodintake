@@ -4,11 +4,18 @@
         <attribute name="name" optional="YES" attributeType="String"/>
         <attribute name="show" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
     </entity>
+    <entity name="Day" representedClassName="Day" syncable="YES" codeGenerationType="class">
+        <attribute name="dayOfWeek" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <relationship name="mealType" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="MealType"/>
+    </entity>
     <entity name="Meal" representedClassName="Meal" syncable="YES" codeGenerationType="class">
         <attribute name="time" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <relationship name="mealType" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="MealType"/>
     </entity>
     <entity name="MealType" representedClassName="MealType" syncable="YES" codeGenerationType="class">
+        <attribute name="daily" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="max" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="min" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="name" optional="YES" attributeType="String"/>
         <relationship name="category" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Category"/>
     </entity>

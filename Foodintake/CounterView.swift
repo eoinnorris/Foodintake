@@ -66,26 +66,34 @@ extension CounterView {
             VStack {
                 // Top section with title, + & - buttons and count
                 HStack {
-                    Text(mealType.name ?? "")
+                    Text(mealType.capitalisedName)
                         .padding(5)
                         .frame(alignment: .leading)
+                        .font(.title3)
                     
                     Spacer()
-                    
                     Button(action: {
                         deleteMostRecentMeal(ofType: self.mealType)
                     }) {
                         Image(systemName: "minus.circle.fill")
+                            .resizable()
+                            .frame(width: UILayout.dailyButtonSize, height: UILayout.dailyButtonSize)
                     }
+                    .buttonStyle(CounterButtonStyle())
                     .disabled(isDecrementDisabled)
                     Text("\(countOfMeals(ofType: self.mealType))")
+                        .font(.title3)
                         .foregroundColor(counterColor)
                         .padding(.horizontal, 10)
+                    
                     Button(action: {
                         addMeal(ofType: self.mealType)
                     }) {
                         Image(systemName: "plus.circle.fill")
+                            .resizable()
+                            .frame(width: UILayout.dailyButtonSize, height: UILayout.dailyButtonSize)
                     }
+                    .buttonStyle(CounterButtonStyle())
                 }
                 .font(.largeTitle)
                 .padding()

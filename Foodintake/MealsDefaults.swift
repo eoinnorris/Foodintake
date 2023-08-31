@@ -14,35 +14,54 @@ enum DefaultMealTypeEnum:String, CaseIterable {
     case snack
     case alcohol
     
-    struct Limit {
-        static let bread = 2
-        static let fruit = 5
-        static let meal = 3
-        static let snack = 1
+    struct MinLimit {
+        static let bread = 0
+        static let fruit = 0
+        static let meal = 2
+        static let snack = 0
         static let alcohol = 0
 
     }
     
+    struct MaxLimit {
+        static let bread = 10
+        static let fruit = 10
+        static let meal = 5
+        static let snack = 10
+        static let alcohol = 20
+        
+    }
+    
     // add weekend exceptions
-    var limit:Int {
+    var minLimit:Int {
         switch self {
         case .bread:
-            return Limit.bread
+            return MinLimit.bread
         case .fruit:
-            return Limit.fruit
+            return MinLimit.fruit
         case .meal:
-            return Limit.meal
+            return MinLimit.meal
         case .snack:
-            return Limit.snack
+            return MinLimit.snack
         case .alcohol:
-            return Limit.alcohol
+            return MinLimit.alcohol
         }
     }
     
-    func isOverLimit(for value:Int) -> Bool {
-        value > limit
+    var maxLimit:Int {
+        switch self {
+        case .bread:
+            return MaxLimit.bread
+        case .fruit:
+            return MaxLimit.fruit
+        case .meal:
+            return MaxLimit.meal
+        case .snack:
+            return MaxLimit.snack
+        case .alcohol:
+            return MaxLimit.alcohol
+        }
     }
-    
 }
 
 

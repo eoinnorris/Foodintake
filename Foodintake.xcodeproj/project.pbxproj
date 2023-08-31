@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		A99EF2882A9F8A5300FC0140 /* CounterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A99EF2872A9F8A5300FC0140 /* CounterView.swift */; };
+		A99EF28A2AA0821E00FC0140 /* CoreDataExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A99EF2892AA0821E00FC0140 /* CoreDataExtensions.swift */; };
+		A99EF28C2AA094E700FC0140 /* ButtonStyles.swift in Sources */ = {isa = PBXBuildFile; fileRef = A99EF28B2AA094E700FC0140 /* ButtonStyles.swift */; };
 		A9AA665C2A9F313C00D3378E /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9AA665B2A9F313C00D3378E /* SettingsView.swift */; };
 		A9AA665E2A9F315900D3378E /* ChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9AA665D2A9F315900D3378E /* ChartView.swift */; };
 		A9DCA72B2A9251AE00B6CC1B /* FoodintakeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DCA72A2A9251AE00B6CC1B /* FoodintakeApp.swift */; };
@@ -42,6 +44,8 @@
 
 /* Begin PBXFileReference section */
 		A99EF2872A9F8A5300FC0140 /* CounterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CounterView.swift; sourceTree = "<group>"; };
+		A99EF2892AA0821E00FC0140 /* CoreDataExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataExtensions.swift; sourceTree = "<group>"; };
+		A99EF28B2AA094E700FC0140 /* ButtonStyles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonStyles.swift; sourceTree = "<group>"; };
 		A9AA665B2A9F313C00D3378E /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		A9AA665D2A9F315900D3378E /* ChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartView.swift; sourceTree = "<group>"; };
 		A9DCA7272A9251AE00B6CC1B /* Foodintake.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Foodintake.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -88,6 +92,7 @@
 		A9DCA71E2A9251AE00B6CC1B = {
 			isa = PBXGroup;
 			children = (
+				A99EF28B2AA094E700FC0140 /* ButtonStyles.swift */,
 				A9DCA7292A9251AE00B6CC1B /* Foodintake */,
 				A9DCA73F2A9251B000B6CC1B /* FoodintakeTests */,
 				A9DCA7492A9251B000B6CC1B /* FoodintakeUITests */,
@@ -113,6 +118,7 @@
 				A9DCA7592A92526D00B6CC1B /* DailyView.swift */,
 				A9AA665D2A9F315900D3378E /* ChartView.swift */,
 				A9AA665B2A9F313C00D3378E /* SettingsView.swift */,
+				A99EF2892AA0821E00FC0140 /* CoreDataExtensions.swift */,
 				A9DCA75D2A9277FF00B6CC1B /* MealsDefaults.swift */,
 				A9DCA75B2A9267AA00B6CC1B /* DateHelper.swift */,
 				A9DCA72E2A9251B000B6CC1B /* Assets.xcassets */,
@@ -278,6 +284,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A99EF28C2AA094E700FC0140 /* ButtonStyles.swift in Sources */,
+				A99EF28A2AA0821E00FC0140 /* CoreDataExtensions.swift in Sources */,
 				A9DCA7342A9251B000B6CC1B /* Persistence.swift in Sources */,
 				A9AA665C2A9F313C00D3378E /* SettingsView.swift in Sources */,
 				A9DCA75E2A9277FF00B6CC1B /* MealsDefaults.swift in Sources */,

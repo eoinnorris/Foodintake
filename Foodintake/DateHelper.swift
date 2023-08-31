@@ -47,6 +47,16 @@ class DateHelper {
 }
 
 extension Date {
+    var dayNameAndDate: String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "EE" // Day name
+        let dayName = dateFormatter.string(from: self)
+        
+        dateFormatter.dateFormat = "d MMMM" // Date in the form of 21 July
+        let formattedDate = dateFormatter.string(from: self)
+        
+        return "\(dayName), \(formattedDate)"
+    }
     
     var shortFormattedDate: String {
         let formatter = DateFormatter()

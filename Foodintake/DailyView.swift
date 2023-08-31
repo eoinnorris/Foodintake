@@ -12,9 +12,27 @@ import CoreData
 
 
 struct UILayout {
-    static let horizontalTileHeight = 65.0
+    static let horizontalTileHeight = 50.0
+    static let dailyButtonSize = 25.0
+
 }
 
+struct WelcomeView: View {
+    
+    var body: some View {
+        VStack {
+            Text("Welcome")
+                .font(.largeTitle)
+                .padding(10.0)
+            Text(today)
+                .font(.subheadline)
+        }
+    }
+    
+    var today: String {
+        Date.now.dayNameAndDate
+    }
+}
 
 
 struct DailyView: View {
@@ -36,8 +54,9 @@ struct DailyView: View {
     
     var body: some View {
         VStack {
+            WelcomeView()
             Spacer()
-            ForEach(mealTypes, id: \.self) { type in
+            ForEach(mealTypes, id: \.id) { type in
                 CounterView(meals: Array(self.meals), mealType:type)
                     .frame(height:UILayout.horizontalTileHeight)
                     .padding([.bottom, .top], 10)
@@ -113,6 +132,9 @@ extension DailyView {
             // Create a new MealType managed object
             let newMealType = MealType(context: viewContext)
             newMealType.name = mealType.rawValue
+            newMealType.max = Int16(mealType.maxLimit)
+            newMealType.min =  Int16(mealType.minLimit)
+
             
             // Check if the category 'food' already exists
             let categoryFetchRequest: NSFetchRequest<Category> = Category.fetchRequest()
