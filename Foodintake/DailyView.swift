@@ -73,7 +73,7 @@ struct DailyView: View {
             Text(lastUpdatedText)
                 .padding(.bottom, 8)
         }.onAppear() {
-            saveDefaultMealTypes()
+            populateDaysFromNow()
         }
         .popover(isPresented: $showingPopover, content: {
             SettingsView()
@@ -121,54 +121,68 @@ extension DailyView {
         }
     }
     
-    private func getTypesForWeek() {
-        let fetchRequest: NSFetchRequest<MealType> = MealType.fetchRequest()
-        let existingDays = try? viewContext.fetch(fetchRequest)
-        let now = Date.now
-        let epochDay = DateHelper.daysSince1970(from: now, withLocale: Locale.current)
+    private func daysMapping(_ days:[Day]) -> [Int:Day] {
+        var result = [Int:Day]()
+        for day in days {
+            result[Int(day.daysSince1970)] = day
+        }
         
+        return result
     }
     
     
+    private func middayOfDaySince1970(days: Int, locale: Locale) -> Date? {
+        let secondsSince1970 = TimeInterval(days * 86400)  // 86400 seconds in a day
+        let date = Date(timeIntervalSince1970: secondsSince1970)
+        
+        var calendar = Calendar.current
+        calendar.locale = locale
+        
+        var components = calendar.dateComponents([.year, .month, .day], from: date)
+        components.hour = 12
+        
+        return calendar.date(from: components)
+    }
+
+
+    
+    private func populateDaysFromNow() {
+        populateDaysPerWeek(from: Date.now)
+    }
     
     
-    private func saveDefaultMealTypes() {
+    private func populateDaysPerWeek(from date:Date) {
+        let now = Date.now
+        let fetchRequest: NSFetchRequest<Day> = Day.fetchRequest()
+        if let existingDays = try? viewContext.fetch(fetchRequest) {
+            let dayMapping = daysMapping(existingDays)
+            let epochDay = DateHelper.daysSince1970(from: now, withLocale: Locale.current)
+            let nextWeek = epochDay + 7
+            
+            for nextDay in epochDay...nextWeek {
+                if dayMapping[nextDay] == nil {
+                    if let date = middayOfDaySince1970(days: nextDay, locale: Locale.current) {
+                        saveDefaultMealTypes(for:date)
+                    }
+                }
+            }
+        }
+    }
+    
+    private func saveDefaultMealTypes(for date:Date) {
         // Enumerate the DefaultMealTypeEnum
         for mealType in DefaultMealTypeEnum.allCases {
             
-            // Check if the meal type already exists
-            let fetchRequest: NSFetchRequest<MealType> = MealType.fetchRequest()
-            fetchRequest.predicate = NSPredicate(format: "name == %@", mealType.rawValue)
-            let existingMealTypes = try? viewContext.fetch(fetchRequest)
-            
-            if let existingMealType = existingMealTypes?.first {
-                if  mealType.rawValue == existingMealType.name {
-                    // If the meal type already exists, we skip adding it again
-                    continue
-                }
-            }
+            let day = Day(context: viewContext)
+            day.date = date
+            day.daysSince1970 = Int32(DateHelper.daysSince1970(from: date, withLocale: Locale.current))
             
             // Create a new MealType managed object
             let newMealType = MealType(context: viewContext)
             newMealType.name = mealType.rawValue
             newMealType.max = Int16(mealType.maxLimit)
             newMealType.min =  Int16(mealType.minLimit)
-            
-            
-//            // Check if the category 'food' already exists
-//            let categoryFetchRequest: NSFetchRequest<Category> = Category.fetchRequest()
-//            categoryFetchRequest.predicate = NSPredicate(format: "name == %@", "food")
-//            let existingCategories = try? viewContext.fetch(categoryFetchRequest)
-//
-//            if let existingCategory = existingCategories?.first {
-//                newMealType.category = existingCategory
-//            } else {
-//                // Create a new Category managed object if it doesn't exist
-//                let newCategory = Category(context: viewContext)
-//                newCategory.name = "food"
-//                newCategory.show = true
-//                newMealType.category = newCategory
-//            }
+                        
             
             // Save the context
             do {
