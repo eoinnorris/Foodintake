@@ -14,12 +14,12 @@ class DateHelper {
     
     func addNowToRecord() {
         let now = Date()
-        let days = daysSince1970(from: now, withLocale: Locale.current)
+        let days = DateHelper.daysSince1970(from: now, withLocale: Locale.current)
         dayMappings[days] = now
     }
     
     func lastEatTime(forDate date:Date) -> String {
-        let daysSince1970 = daysSince1970(from: date, withLocale: Locale.current)
+        let daysSince1970 = DateHelper.daysSince1970(from: date, withLocale: Locale.current)
         return lastEatTime(forDay: daysSince1970)
     }
     
@@ -36,7 +36,8 @@ class DateHelper {
         return dateFormatter.string(from: date)
     }
     
-    func daysSince1970(from date: Date, withLocale locale: Locale) -> Int {
+    
+    static func daysSince1970(from date: Date, withLocale locale: Locale) -> Int {
         let calendar = Calendar.current
         let startDate = Date(timeIntervalSince1970: 0)  // Represents January 1, 1970
         guard let days = calendar.dateComponents([.day], from: startDate, to: date).day else {

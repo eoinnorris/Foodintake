@@ -9,42 +9,48 @@ import SwiftUI
 
 struct CounterView: View {
     @Environment(\.managedObjectContext) private var viewContext
-    var meals: [Meal]
-    let mealType:MealType
+    var mealType: MealType
+    @State private var count:Int = 0
 }
 
 
 // functions
 extension CounterView {
     
-    // Function to get the count of meals of a specific type
-    private func countOfMeals(ofType type: MealType) -> Int {
-        return meals.filter { $0.mealType == type }.count
-    }
-    
-    private func addMeal(ofType type:MealType) {
+    private func addMeal(ofType mealType:MealType) {
         withAnimation {
-            let newMeal = Meal(context: viewContext)
-            newMeal.time = Date()
-            newMeal.mealType = type
+            let now = Date.now
+            
+            mealType.count =  mealType.count + 1
+            mealType.time = now
+            
+            if mealType.day == nil {
+                let day = Day(context: viewContext)
+                day.date = now
+                day.daysSince1970 = Int32(DateHelper.daysSince1970(from: now, withLocale: Locale.current))
+                day.addToMeals(mealType)
+            }
+            
+            count = Int(mealType.count)
             
             do {
                 try viewContext.save()
             } catch {
-                print("Failed to save newMeal \(newMeal) to context \(viewContext)")
+                print("Failed to save newMeal \(mealType) to context \(viewContext)")
             }
         }
     }
     
     
-    func deleteMostRecentMeal(ofType type: MealType) {
-        if let mealToDelete = meals.first(where: { $0.mealType == type }) {
-            viewContext.delete(mealToDelete)
+    func deleteMostRecentMeal(ofType mealType: MealType) {
+        withAnimation {
+            mealType.count =  mealType.count - 1
+            count = Int(mealType.count)
+            
             do {
                 try viewContext.save()
             } catch {
-                let nsError = error as NSError
-                fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
+                print("Failed to save newMeal \(mealType) to context \(viewContext)")
             }
         }
     }
@@ -61,8 +67,6 @@ extension CounterView {
                 .fill(Material.thickMaterial)
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
                 .shadow(radius: 2.0)
-            
-            
             VStack {
                 // Top section with title, + & - buttons and count
                 HStack {
@@ -81,7 +85,7 @@ extension CounterView {
                     }
                     .buttonStyle(CounterButtonStyle())
                     .disabled(isDecrementDisabled)
-                    Text("\(countOfMeals(ofType: self.mealType))")
+                    Text("\(mealType.count)")
                         .font(.title3)
                         .foregroundColor(counterColor)
                         .padding(.horizontal, 10)
@@ -97,18 +101,15 @@ extension CounterView {
                 }
                 .font(.largeTitle)
                 .padding()
+            }.onAppear {
+                count = Int(mealType.count)
             }
         }
         
-        var mealCount: Int {
-            countOfMeals(ofType: self.mealType)
-        }
-        
         var isDecrementDisabled:Bool {
-            mealCount == 0
+            count == 0
         }
-        
-        
+                
         var counterColor: Color {
             let overLimit =  false
             if overLimit {
@@ -119,3 +120,4 @@ extension CounterView {
         }
     }
 }
+

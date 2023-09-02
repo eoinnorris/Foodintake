@@ -12,19 +12,24 @@ class SettingsViewController: ObservableObject {
 }
 
 struct SliderSettingsView: View {
-    
     let mealType: MealType
     @State private var value: Double = 0.0
+    @StateObject var slider:CustomSliderViewModel
+    
+    internal init(mealType: MealType) {
+        self.mealType = mealType
+        self._slider = StateObject(wrappedValue: CustomSliderViewModel(start: Double(mealType.min), end: Double(mealType.max)))
+    }
     
     var body: some View {
         VStack {
             Form {
                 HStack {
-                    Text("\(mealType.capitalisedName) allowance: \(Int(value))")
+                    Text("\(mealType.capitalisedName) max: \(Int(slider.highHandle.currentValue))")
+                    Text("\(mealType.capitalisedName) min: \(Int(slider.lowHandle.currentValue))")
                 }.padding(.bottom, 5)
                 
-                Slider(value: $value, in: Double(mealType.min)...Double(mealType.max), step:1)
-                    .scaleEffect(0.8)
+                SliderView(slider: slider)
             }
         }.onAppear{
             value = Double(mealType.min)

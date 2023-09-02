@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A96FA82A2AA21F7C00FB205D /* CustomSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = A96FA8292AA21F7C00FB205D /* CustomSlider.swift */; };
+		A96FA8472AA39BFA00FB205D /* Day+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = A96FA8452AA39BFA00FB205D /* Day+CoreDataProperties.swift */; };
+		A96FA8482AA39BFA00FB205D /* MealType+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = A96FA8462AA39BFA00FB205D /* MealType+CoreDataProperties.swift */; };
+		A96FA84A2AA39CE600FB205D /* MealType+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = A96FA8492AA39CE600FB205D /* MealType+CoreDataClass.swift */; };
+		A96FA84C2AA39D0900FB205D /* Day+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = A96FA84B2AA39D0900FB205D /* Day+CoreDataClass.swift */; };
 		A99EF2882A9F8A5300FC0140 /* CounterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A99EF2872A9F8A5300FC0140 /* CounterView.swift */; };
 		A99EF28A2AA0821E00FC0140 /* CoreDataExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A99EF2892AA0821E00FC0140 /* CoreDataExtensions.swift */; };
 		A99EF28C2AA094E700FC0140 /* ButtonStyles.swift in Sources */ = {isa = PBXBuildFile; fileRef = A99EF28B2AA094E700FC0140 /* ButtonStyles.swift */; };
@@ -43,6 +48,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		A96FA8292AA21F7C00FB205D /* CustomSlider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomSlider.swift; sourceTree = "<group>"; };
+		A96FA8452AA39BFA00FB205D /* Day+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Day+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		A96FA8462AA39BFA00FB205D /* MealType+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MealType+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		A96FA8492AA39CE600FB205D /* MealType+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "MealType+CoreDataClass.swift"; sourceTree = "<group>"; };
+		A96FA84B2AA39D0900FB205D /* Day+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Day+CoreDataClass.swift"; sourceTree = "<group>"; };
 		A99EF2872A9F8A5300FC0140 /* CounterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CounterView.swift; sourceTree = "<group>"; };
 		A99EF2892AA0821E00FC0140 /* CoreDataExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataExtensions.swift; sourceTree = "<group>"; };
 		A99EF28B2AA094E700FC0140 /* ButtonStyles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonStyles.swift; sourceTree = "<group>"; };
@@ -92,7 +102,6 @@
 		A9DCA71E2A9251AE00B6CC1B = {
 			isa = PBXGroup;
 			children = (
-				A99EF28B2AA094E700FC0140 /* ButtonStyles.swift */,
 				A9DCA7292A9251AE00B6CC1B /* Foodintake */,
 				A9DCA73F2A9251B000B6CC1B /* FoodintakeTests */,
 				A9DCA7492A9251B000B6CC1B /* FoodintakeUITests */,
@@ -113,6 +122,12 @@
 		A9DCA7292A9251AE00B6CC1B /* Foodintake */ = {
 			isa = PBXGroup;
 			children = (
+				A96FA84B2AA39D0900FB205D /* Day+CoreDataClass.swift */,
+				A96FA8492AA39CE600FB205D /* MealType+CoreDataClass.swift */,
+				A96FA8452AA39BFA00FB205D /* Day+CoreDataProperties.swift */,
+				A96FA8462AA39BFA00FB205D /* MealType+CoreDataProperties.swift */,
+				A99EF28B2AA094E700FC0140 /* ButtonStyles.swift */,
+				A96FA8292AA21F7C00FB205D /* CustomSlider.swift */,
 				A99EF2872A9F8A5300FC0140 /* CounterView.swift */,
 				A9DCA72A2A9251AE00B6CC1B /* FoodintakeApp.swift */,
 				A9DCA7592A92526D00B6CC1B /* DailyView.swift */,
@@ -286,11 +301,16 @@
 			files = (
 				A99EF28C2AA094E700FC0140 /* ButtonStyles.swift in Sources */,
 				A99EF28A2AA0821E00FC0140 /* CoreDataExtensions.swift in Sources */,
+				A96FA84A2AA39CE600FB205D /* MealType+CoreDataClass.swift in Sources */,
+				A96FA8482AA39BFA00FB205D /* MealType+CoreDataProperties.swift in Sources */,
+				A96FA84C2AA39D0900FB205D /* Day+CoreDataClass.swift in Sources */,
 				A9DCA7342A9251B000B6CC1B /* Persistence.swift in Sources */,
 				A9AA665C2A9F313C00D3378E /* SettingsView.swift in Sources */,
 				A9DCA75E2A9277FF00B6CC1B /* MealsDefaults.swift in Sources */,
+				A96FA8472AA39BFA00FB205D /* Day+CoreDataProperties.swift in Sources */,
 				A9DCA75A2A92526E00B6CC1B /* DailyView.swift in Sources */,
 				A9AA665E2A9F315900D3378E /* ChartView.swift in Sources */,
+				A96FA82A2AA21F7C00FB205D /* CustomSlider.swift in Sources */,
 				A9DCA75C2A9267AA00B6CC1B /* DateHelper.swift in Sources */,
 				A9DCA72B2A9251AE00B6CC1B /* FoodintakeApp.swift in Sources */,
 				A9DCA7372A9251B000B6CC1B /* Foodintake.xcdatamodeld in Sources */,

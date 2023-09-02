@@ -19,6 +19,15 @@ struct UILayout {
 
 struct WelcomeView: View {
     
+    @Environment(\.managedObjectContext) private var viewContext
+    
+    @FetchRequest(
+        sortDescriptors: [NSSortDescriptor(keyPath: \Day.date, ascending: false)],
+        animation: .none)
+    
+    private var days: FetchedResults<Day>
+    
+    
     var body: some View {
         VStack {
             Text("Welcome")
@@ -26,6 +35,11 @@ struct WelcomeView: View {
                 .padding(10.0)
             Text(today)
                 .font(.subheadline)
+            Menu("Today") {
+                ForEach(days, id: \.id) { day in
+                    Text(day.dateOrNow.dayNameAndDate)
+                }
+            }
         }
     }
     
@@ -40,12 +54,6 @@ struct DailyView: View {
     @State private var showingPopover = false
     
     @FetchRequest(
-        sortDescriptors: [NSSortDescriptor(keyPath: \Meal.time, ascending: false)],
-        animation: .default)
-        private var meals: FetchedResults<Meal>
-
-    
-    @FetchRequest(
         sortDescriptors: [NSSortDescriptor(keyPath: \MealType.name, ascending: true)],
         animation: .none)
     
@@ -55,9 +63,9 @@ struct DailyView: View {
     var body: some View {
         VStack {
             WelcomeView()
-            Spacer()
+                .padding(.bottom, 10)
             ForEach(mealTypes, id: \.id) { type in
-                CounterView(meals: Array(self.meals), mealType:type)
+                CounterView(mealType:type)
                     .frame(height:UILayout.horizontalTileHeight)
                     .padding([.bottom, .top], 10)
             }
@@ -85,7 +93,7 @@ struct DailyView: View {
     
  
     var lastUpdatedText: String {
-        if let date = meals.first?.time {
+        if let date = mealTypes.first?.day?.date {
             return "Last updated: \(date.shortFormattedDate)"
         }
         
@@ -136,20 +144,20 @@ extension DailyView {
             newMealType.min =  Int16(mealType.minLimit)
 
             
-            // Check if the category 'food' already exists
-            let categoryFetchRequest: NSFetchRequest<Category> = Category.fetchRequest()
-            categoryFetchRequest.predicate = NSPredicate(format: "name == %@", "food")
-            let existingCategories = try? viewContext.fetch(categoryFetchRequest)
-            
-            if let existingCategory = existingCategories?.first {
-                newMealType.category = existingCategory
-            } else {
-                // Create a new Category managed object if it doesn't exist
-                let newCategory = Category(context: viewContext)
-                newCategory.name = "food"
-                newCategory.show = true
-                newMealType.category = newCategory
-            }
+//            // Check if the category 'food' already exists
+//            let categoryFetchRequest: NSFetchRequest<Category> = Category.fetchRequest()
+//            categoryFetchRequest.predicate = NSPredicate(format: "name == %@", "food")
+//            let existingCategories = try? viewContext.fetch(categoryFetchRequest)
+//
+//            if let existingCategory = existingCategories?.first {
+//                newMealType.category = existingCategory
+//            } else {
+//                // Create a new Category managed object if it doesn't exist
+//                let newCategory = Category(context: viewContext)
+//                newCategory.name = "food"
+//                newCategory.show = true
+//                newMealType.category = newCategory
+//            }
             
             // Save the context
             do {
@@ -160,15 +168,16 @@ extension DailyView {
         }
     }
     
-    private func mealsOnDay(_ day:Date) -> [Meal] {
-        return  mealsOnDay(day, fromMeals: Array(self.meals) , forTimeZone: TimeZone.current)
+    private func mealsOnDay(_ day:Date) -> [MealType] {
+        []
+//        return  mealsOnDay(day, fromMeals: Array(self.meals) , forTimeZone: TimeZone.current)
     }
     
-    private func mealsOnDay(_ day: Date, fromMeals meals: [Meal]) -> [Meal] {
+    private func mealsOnDay(_ day: Date, fromMeals meals: [MealType]) -> [MealType] {
         mealsOnDay(day, fromMeals: meals, forTimeZone: TimeZone.current)
     }
     
-    private func mealsOnDay(_ day: Date, fromMeals meals: [Meal], forTimeZone timeZone: TimeZone) -> [Meal] {
+    private func mealsOnDay(_ day: Date, fromMeals meals: [MealType], forTimeZone timeZone: TimeZone) -> [MealType] {
         let calendar = Calendar.current
         
         // Convert target day to local start and end of day

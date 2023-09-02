@@ -17,3 +17,13 @@ extension MealType {
     }
     
 }
+
+extension Day {
+    
+    
+    var dateOrNow: Date {
+        date ?? Date.now
+    }
+}
+
+
