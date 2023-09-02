@@ -121,6 +121,17 @@ extension DailyView {
         }
     }
     
+    private func getTypesForWeek() {
+        let fetchRequest: NSFetchRequest<MealType> = MealType.fetchRequest()
+        let existingDays = try? viewContext.fetch(fetchRequest)
+        let now = Date.now
+        let epochDay = DateHelper.daysSince1970(from: now, withLocale: Locale.current)
+        
+    }
+    
+    
+    
+    
     private func saveDefaultMealTypes() {
         // Enumerate the DefaultMealTypeEnum
         for mealType in DefaultMealTypeEnum.allCases {
@@ -142,7 +153,7 @@ extension DailyView {
             newMealType.name = mealType.rawValue
             newMealType.max = Int16(mealType.maxLimit)
             newMealType.min =  Int16(mealType.minLimit)
-
+            
             
 //            // Check if the category 'food' already exists
 //            let categoryFetchRequest: NSFetchRequest<Category> = Category.fetchRequest()
