@@ -59,6 +59,20 @@ extension Date {
         return "\(dayName), \(formattedDate)"
     }
     
+    var recentDate: String? {
+        let calendar = Calendar.current
+        
+        if calendar.isDateInToday(self) {
+            return "Today"
+        } else if calendar.isDateInYesterday(self) {
+            return "Yesterday"
+        } else if calendar.isDateInTomorrow(self) {
+            return "Tomorrow"
+        }
+        
+        return nil
+    }
+    
     var shortFormattedDate: String {
         let formatter = DateFormatter()
         formatter.dateStyle = .none

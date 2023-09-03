@@ -38,20 +38,51 @@ struct SliderSettingsView: View {
 }
 
 
+//struct HeaderView: View {
+//
+//
+//}
+
 struct SettingsView: View {
     
     @Environment(\.presentationMode) var presentationMode
+    let selectedDay:Day
     @FetchRequest(
         sortDescriptors: [NSSortDescriptor(keyPath: \MealType.name, ascending: true)],
         animation: .none)
     
     private var mealTypes: FetchedResults<MealType>
     
+    private var dayMealTypes: [MealType] {
+        let daysArray = Array(mealTypes)
+        return daysArray.filter {$0.day == selectedDay}
+    }
+    
+    var selectedDayString: String {
+        guard let date = selectedDay.date else {
+            return "Today"
+        }
+        
+        return date.dayNameAndDate
+    }
+    
+    @ViewBuilder
+    var header: some View {
+        VStack {
+            HStack {
+                Text("Limits for:")
+                    .padding(.trailing, 5)
+                Text(selectedDayString)
+
+            }
+        }
+    }
+    
     var body: some View {
         NavigationStack {
             VStack {
-                Spacer()
-                ForEach(mealTypes, id: \.self) { type in
+                header
+                ForEach(dayMealTypes, id: \.self) { type in
                     SliderSettingsView(mealType:type)
                 }
                 Spacer()

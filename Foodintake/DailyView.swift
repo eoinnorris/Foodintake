@@ -20,6 +20,7 @@ struct UILayout {
 struct WelcomeView: View {
     
     @Environment(\.managedObjectContext) private var viewContext
+    @Binding var selectedDay:Day?
     
     @FetchRequest(
         sortDescriptors: [NSSortDescriptor(keyPath: \Day.date, ascending: false)],
@@ -27,6 +28,11 @@ struct WelcomeView: View {
     
     private var days: FetchedResults<Day>
     
+    var sortedDays:[Day] {
+        days.sorted {
+            $0.dateOrNow < $1.dateOrNow
+        }
+    }
     
     var body: some View {
         VStack {
@@ -35,36 +41,89 @@ struct WelcomeView: View {
                 .padding(10.0)
             Text(today)
                 .font(.subheadline)
-            Menu("Today") {
-                ForEach(days, id: \.id) { day in
-                    Text(day.dateOrNow.dayNameAndDate)
+            HStack {
+                Text("Showing results for:")
+                    .padding(.trailing, 5)
+                Menu {
+                    ForEach(sortedDays, id: \.id) { day in
+                        Button(day.dateOrNow.dayNameAndDate) {
+                            selectedDay = day
+                        }
+                    }
+                } label: {
+                    Text(selectedDayString)
                 }
             }
+        }.onAppear {
+            updateSelectedDay()
+        }
+    }
+    
+    func updateSelectedDay() {
+        let epochDay = DateHelper.daysSince1970(from: Date.now, withLocale: Locale.current)
+        let fetchRequest: NSFetchRequest<Day> = Day.fetchRequest()
+        fetchRequest.predicate = NSPredicate(format: "(%K == %d)", #keyPath(Day.daysSince1970), epochDay)
+        
+        if let day =  try? viewContext.fetch(fetchRequest).first {
+            selectedDay = day
         }
     }
     
     var today: String {
         Date.now.dayNameAndDate
     }
-}
+    
+    var selectedDayString: String {
+        guard let date = selectedDay?.date else {
+            return "Today"
+        }
+                
+        return date.recentDate ?? date.dayNameAndDate
 
+    }
+}
 
 struct DailyView: View {
     @Environment(\.managedObjectContext) private var viewContext
     @State private var showingPopover = false
+    @State private var selectedDay:Day?
+
     
     @FetchRequest(
         sortDescriptors: [NSSortDescriptor(keyPath: \MealType.name, ascending: true)],
         animation: .none)
     
     private var mealTypes: FetchedResults<MealType>
+    
+    private var dayMealTypes: [MealType] {
+        let daysArray = Array(mealTypes)
+        return daysArray.filter {$0.day == selectedDay}
+    }
 
+    
+    func updateSelectedDay() {
+        let epochDay = DateHelper.daysSince1970(from: Date.now, withLocale: Locale.current)
+        let fetchRequest: NSFetchRequest<Day> = Day.fetchRequest()
+        fetchRequest.predicate = NSPredicate(format: "(%K == %d)", #keyPath(Day.daysSince1970), epochDay)
+        
+        if let day =  try? viewContext.fetch(fetchRequest).first {
+            selectedDay = day
+        }
+    }
+    
+    @ViewBuilder
+    var settingsView: some View {
+        if let selectedDay {
+            SettingsView(selectedDay: selectedDay)
+        }
+        EmptyView()
+    }
     
     var body: some View {
         VStack {
-            WelcomeView()
+            WelcomeView(selectedDay: $selectedDay)
                 .padding(.bottom, 10)
-            ForEach(mealTypes, id: \.id) { type in
+            ForEach(dayMealTypes, id: \.id) { type in
                 CounterView(mealType:type)
                     .frame(height:UILayout.horizontalTileHeight)
                     .padding([.bottom, .top], 10)
@@ -76,7 +135,7 @@ struct DailyView: View {
             populateDaysFromNow()
         }
         .popover(isPresented: $showingPopover, content: {
-            SettingsView()
+            settingsView
         })
         
         .toolbar {
@@ -182,7 +241,10 @@ extension DailyView {
             newMealType.name = mealType.rawValue
             newMealType.max = Int16(mealType.maxLimit)
             newMealType.min =  Int16(mealType.minLimit)
-                        
+            
+            day.addToMeals(newMealType)
+            
+            newMealType.day = day
             
             // Save the context
             do {
