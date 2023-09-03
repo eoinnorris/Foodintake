@@ -55,64 +55,32 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "D80A29FF-50AF-4549-982C-28C5133D7E81"
+            uuid = "BDBF38CC-E634-4327-9FBD-706D3C116029"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Foodintake/DailyView.swift"
+            filePath = "Foodintake/ButtonStyles.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "77"
-            endingLineNumber = "77"
-            landmarkName = "selectedDayString"
+            startingLineNumber = "52"
+            endingLineNumber = "52"
+            landmarkName = "decrementBGColor"
             landmarkType = "24">
-            <Locations>
-               <Location
-                  uuid = "D80A29FF-50AF-4549-982C-28C5133D7E81 - b7389fa78d9de331"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Foodintake.WelcomeView.selectedDayString.getter : Swift.String"
-                  moduleName = "Foodintake"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/eoinkortext/Projects/FoodIntake/Foodintake/Foodintake/DailyView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "54"
-                  endingLineNumber = "54"
-                  offsetFromSymbolStart = "312">
-               </Location>
-               <Location
-                  uuid = "D80A29FF-50AF-4549-982C-28C5133D7E81 - b7389fa78d9de145"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Foodintake.WelcomeView.selectedDayString.getter : Swift.String"
-                  moduleName = "Foodintake"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/eoinkortext/Projects/FoodIntake/Foodintake/Foodintake/DailyView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "66"
-                  endingLineNumber = "66"
-                  offsetFromSymbolStart = "312">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "86E526C0-6DB2-44D2-9C40-60345A0050FC"
+            uuid = "AF142C3A-EEBE-46D2-A04F-70FCFCCE7CB4"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Foodintake/DailyView.swift"
+            filePath = "Foodintake/ButtonStyles.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "81"
-            endingLineNumber = "81"
-            landmarkName = "selectedDayString"
+            startingLineNumber = "42"
+            endingLineNumber = "42"
+            landmarkName = "incrementBGColor"
             landmarkType = "24">
          </BreakpointContent>
       </BreakpointProxy>
