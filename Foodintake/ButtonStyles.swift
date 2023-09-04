@@ -16,7 +16,7 @@ struct CounterButtonStyle: ButtonStyle {
     
     let mealType: MealType
     let buttonDirection:ButtonDirection
-    // Large Purple Button, used in Auth and Terms flows
+    
     func makeBody(configuration: Configuration) -> some View {
         CounterButtonView(configuration: configuration,
                           mealType: mealType,

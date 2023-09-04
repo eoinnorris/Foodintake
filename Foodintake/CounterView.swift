@@ -83,7 +83,8 @@ extension CounterView {
                             .resizable()
                             .frame(width: UILayout.dailyButtonSize, height: UILayout.dailyButtonSize)
                     }
-                    .buttonStyle(CounterButtonStyle(mealType: mealType, buttonDirection: .decrement))
+                    .buttonStyle(CounterButtonStyle(mealType: mealType,
+                                                    buttonDirection: .decrement))
                     .disabled(isDecrementDisabled)
                     Text("\(mealType.count)")
                         .font(.title3)
@@ -97,7 +98,8 @@ extension CounterView {
                             .resizable()
                             .frame(width: UILayout.dailyButtonSize, height: UILayout.dailyButtonSize)
                     }
-                    .buttonStyle(CounterButtonStyle(mealType: mealType,  buttonDirection: .increment))
+                    .buttonStyle(CounterButtonStyle(mealType: mealType,
+                                                    buttonDirection: .increment))
                 }
                 .font(.largeTitle)
                 .padding()
