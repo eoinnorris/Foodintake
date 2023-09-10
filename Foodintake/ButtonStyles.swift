@@ -43,9 +43,7 @@ struct CounterButtonStyle: ButtonStyle {
             if nextValue > mealType.max {
                 return Color.red
             }
-            
             return Color.green
-            
         }
         
         var decrementBGColor: Color {

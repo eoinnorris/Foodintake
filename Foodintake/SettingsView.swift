@@ -22,15 +22,21 @@ struct SliderSettingsView: View {
     }
     
     var body: some View {
-        VStack {
-            Form {
+        ScrollView(.vertical) {
+            VStack {
                 HStack {
-                    Text("\(mealType.capitalisedName) max: \(Int(slider.highHandle.currentValue))")
-                    Text("\(mealType.capitalisedName) min: \(Int(slider.lowHandle.currentValue))")
-                }.padding(.bottom, 5)
-                
+                    Text("\(mealType.capitalisedName)")
+                        .font(.title3)
+                }
                 SliderView(slider: slider)
-            }
+                HStack {
+                    Text("Daily allowance: \(Int(slider.midHandle.currentValue))")
+                    Menu("Limits") {
+                        Text("Max Limits:\(Int(slider.highHandle.currentValue))")
+                        Text("Min Limits:\(Int(slider.lowHandle.currentValue))")
+                    }
+                }
+            }.frame(width: slider.width + 2.0)
         }.onAppear{
             value = Double(mealType.min)
         }
@@ -82,6 +88,8 @@ struct SettingsView: View {
         NavigationStack {
             VStack {
                 header
+                    .padding(.bottom, 10)
+                
                 ForEach(dayMealTypes, id: \.self) { type in
                     SliderSettingsView(mealType:type)
                 }

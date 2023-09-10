@@ -34,8 +34,8 @@ class SliderHandle: ObservableObject {
     let sliderValueRange: Double
     
     //Slider Handle
-    var width: CGFloat = 10
-    var height: CGFloat = 30
+    var width: CGFloat = 8
+    var height: CGFloat = 20
 
     var startLocation: CGPoint
     
@@ -102,20 +102,24 @@ class SliderHandle: ObservableObject {
 class CustomSliderViewModel: ObservableObject {
     
     //Slider Size
-    let width: CGFloat = 300
-    let lineWidth: CGFloat = 8
-    
+    let width: CGFloat = 280
+    let height: CGFloat = 2
+    let radius: CGFloat = 5
+
     //Slider value range from valueStart to valueEnd
     let valueStart: Double
     let valueEnd: Double
     
     //Slider Handle
     @Published var highHandle: SliderHandle
+    @Published var midHandle: SliderHandle
     @Published var lowHandle: SliderHandle
     
     //Handle start percentage (also for starting point)
     @SliderValue var highHandleStartPercentage = 1.0
+    @SliderValue var midHandleStartPercentage = 0.5
     @SliderValue var lowHandleStartPercentage = 0.0
+
     
     var anyCancellableHigh: AnyCancellable?
     var anyCancellableLow: AnyCancellable?
@@ -125,14 +129,21 @@ class CustomSliderViewModel: ObservableObject {
         valueEnd = end
         
         highHandle = SliderHandle(sliderWidth: width,
-                                  sliderHeight: lineWidth,
+                                  sliderHeight: height,
                                   sliderValueStart: valueStart,
                                   sliderValueEnd: valueEnd,
                                   startPercentage: _highHandleStartPercentage
         )
         
+        midHandle = SliderHandle(sliderWidth: width,
+                                  sliderHeight: height,
+                                  sliderValueStart: valueStart,
+                                  sliderValueEnd: valueEnd,
+                                  startPercentage: _midHandleStartPercentage
+        )
+        
         lowHandle = SliderHandle(sliderWidth: width,
-                                 sliderHeight: lineWidth,
+                                 sliderHeight: height,
                                  sliderValueStart: valueStart,
                                  sliderValueEnd: valueEnd,
                                  startPercentage: _lowHandleStartPercentage
@@ -142,6 +153,9 @@ class CustomSliderViewModel: ObservableObject {
             self.objectWillChange.send()
         }
         anyCancellableLow = lowHandle.objectWillChange.sink { _ in
+            self.objectWillChange.send()
+        }
+        anyCancellableLow = midHandle.objectWillChange.sink { _ in
             self.objectWillChange.send()
         }
     }
@@ -163,9 +177,9 @@ struct SliderView: View {
     @ObservedObject var slider: CustomSliderViewModel
     
     var body: some View {
-        RoundedRectangle(cornerRadius: slider.lineWidth)
+        RoundedRectangle(cornerRadius: slider.height)
             .fill(Color.gray.opacity(0.2))
-            .frame(width: slider.width, height: slider.lineWidth)
+            .frame(width: slider.width, height: slider.height)
             .overlay(
                 ZStack {
                     //Path between both handles
@@ -173,13 +187,30 @@ struct SliderView: View {
                     
                     //Low Handle
                     SliderHandleView(handle: slider.lowHandle)
-                        .highPriorityGesture(slider.lowHandle.sliderDragGesture)
+//                        .highPriorityGesture(slider.lowHandle.sliderDragGesture)
+                    
+                    //Low Handle
+                    MidSliderHandleView(handle: slider.midHandle)
+                        .highPriorityGesture(slider.midHandle.sliderDragGesture)
                     
                     //High Handle
                     SliderHandleView(handle: slider.highHandle)
-                        .highPriorityGesture(slider.highHandle.sliderDragGesture)
+//                        .highPriorityGesture(slider.highHandle.sliderDragGesture)
                 }
             )
+    }
+}
+
+struct MidSliderHandleView: View {
+    @ObservedObject var handle: SliderHandle
+    
+    var body: some View {
+        PointedRectangle()
+            .frame(width: handle.width, height: handle.height)
+            .foregroundColor(.blue.opacity(0.8))
+            .shadow(color: Color.black.opacity(0.15), radius: 6, x: 0, y: 0)
+            .scaleEffect(handle.onDrag ? 1.3 : 1)
+            .position(x: handle.currentLocation.x, y: handle.currentLocation.y)
     }
 }
 
@@ -189,7 +220,7 @@ struct SliderHandleView: View {
     var body: some View {
         Rectangle()
             .frame(width: handle.width, height: handle.height)
-            .foregroundColor(.gray.opacity(0.8))
+            .foregroundColor(.black.opacity(0.8))
             .shadow(color: Color.black.opacity(0.15), radius: 6, x: 0, y: 0)
             .scaleEffect(handle.onDrag ? 1.3 : 1)
             .position(x: handle.currentLocation.x, y: handle.currentLocation.y)
@@ -204,6 +235,6 @@ struct SliderPathBetweenView: View {
             path.move(to: slider.lowHandle.currentLocation)
             path.addLine(to: slider.highHandle.currentLocation)
         }
-        .stroke(Color.green, lineWidth: slider.lineWidth)
+        .stroke(Color.green.gradient, lineWidth: slider.height)
     }
 }

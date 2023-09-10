@@ -33,6 +33,17 @@ struct WelcomeView: View {
             $0.dateOrNow < $1.dateOrNow
         }
     }
+        
+    func lastDays(ofNumber number:Int) -> [Day] {
+        guard number > 0 else  {
+            return []
+        }
+        return Array(sortedDays[0...number-1])
+    }
+    
+    var lastTenDays: [Day] {
+        lastDays(ofNumber: 10)
+    }
     
     var body: some View {
         VStack {
@@ -45,7 +56,7 @@ struct WelcomeView: View {
                 Text("Showing results for:")
                     .padding(.trailing, 5)
                 Menu {
-                    ForEach(sortedDays, id: \.id) { day in
+                    ForEach(lastTenDays, id: \.id) { day in
                         Button(day.dateOrNow.dayNameAndDate) {
                             selectedDay = day
                         }
