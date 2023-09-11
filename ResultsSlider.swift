@@ -1,15 +1,16 @@
 //
-//  CustomSlider.swift
+//  ResultsSlider.swift
 //  Foodintake
 //
-//  Created by eoinkortext on 31/08/2023.
+//  Created by eoinkortext on 10/09/2023.
 //
 
 import SwiftUI
 import Combine
 
+//SliderValue to restrict double range: 0.0 to 1.0
 @propertyWrapper
-struct SliderValue {
+struct ResultsSliderValue {
     var value: Double
     
     init(wrappedValue: Double) {
@@ -22,7 +23,7 @@ struct SliderValue {
     }
 }
 
-class SliderHandle: ObservableObject {
+class ResultsSliderHandle: ObservableObject {
     
     //Slider Size
     let sliderWidth: CGFloat
@@ -35,17 +36,21 @@ class SliderHandle: ObservableObject {
     //Slider Handle
     var width: CGFloat = 8
     var height: CGFloat = 20
-
+    
     var startLocation: CGPoint
     
     //Current Value
-    @Published var currentPercentage: SliderValue
+    @Published var currentPercentage: ResultsSliderValue
     
     //Slider Button Location
     @Published var onDrag: Bool
     @Published var currentLocation: CGPoint
     
-    init(sliderWidth: CGFloat, sliderHeight: CGFloat, sliderValueStart: Double, sliderValueEnd: Double, startPercentage: SliderValue) {
+    init(sliderWidth: CGFloat,
+         sliderHeight: CGFloat,
+         sliderValueStart: Double,
+         sliderValueEnd: Double,
+         startPercentage: ResultsSliderValue) {
         self.sliderWidth = sliderWidth
         self.sliderHeight = sliderHeight
         
@@ -62,20 +67,20 @@ class SliderHandle: ObservableObject {
     }
     
     lazy var sliderDragGesture: _EndedGesture<_ChangedGesture<DragGesture>>  = DragGesture()
-        .onChanged { value in
-            self.onDrag = true
-            
-            let dragLocation = value.location
-            
-            //Restrict possible drag area
-            self.restrictSliderBtnLocation(dragLocation)
-            
-            //Get current value
-            self.currentPercentage.wrappedValue = Double(self.currentLocation.x / self.sliderWidth)
-            
-        }.onEnded { _ in
-            self.onDrag = false
-        }
+    .onChanged { value in
+        self.onDrag = true
+        
+        let dragLocation = value.location
+        
+        //Restrict possible drag area
+        self.restrictSliderBtnLocation(dragLocation)
+        
+        //Get current value
+        self.currentPercentage.wrappedValue = Double(self.currentLocation.x / self.sliderWidth)
+        
+    }.onEnded { _ in
+        self.onDrag = false
+    }
     
     private func restrictSliderBtnLocation(_ dragLocation: CGPoint) {
         //On Slider Width
@@ -96,29 +101,34 @@ class SliderHandle: ObservableObject {
     var currentValue: Double {
         return sliderValueStart + currentPercentage.wrappedValue * sliderValueRange
     }
+    
+    //Current Value
+    var intCurrentValue: Int {
+        return Int(sliderValueStart + currentPercentage.wrappedValue * sliderValueRange)
+    }
 }
 
-class CustomSliderViewModel: ObservableObject {
+class ResultsSliderViewModel: ObservableObject {
     
     //Slider Size
     let width: CGFloat = 280
     let height: CGFloat = 2
     let radius: CGFloat = 5
-
+    
     //Slider value range from valueStart to valueEnd
     let valueStart: Double
     let valueEnd: Double
     
     //Slider Handle
-    @Published var highHandle: SliderHandle
-    @Published var midHandle: SliderHandle
-    @Published var lowHandle: SliderHandle
+    @Published var highHandle: ResultsSliderHandle
+    @Published var midHandle:  ResultsSliderHandle
+    @Published var lowHandle:  ResultsSliderHandle
     
     //Handle start percentage (also for starting point)
-    @SliderValue var highHandleStartPercentage = 1.0
-    @SliderValue var midHandleStartPercentage = 0.5
-    @SliderValue var lowHandleStartPercentage = 0.0
-
+    @ResultsSliderValue var highHandleStartPercentage = 1.0
+    @ResultsSliderValue var midHandleStartPercentage = 0.5
+    @ResultsSliderValue var lowHandleStartPercentage = 0.0
+    
     
     var anyCancellableHigh: AnyCancellable?
     var anyCancellableLow: AnyCancellable?
@@ -127,21 +137,21 @@ class CustomSliderViewModel: ObservableObject {
         valueStart = start
         valueEnd = end
         
-        highHandle = SliderHandle(sliderWidth: width,
+        highHandle = ResultsSliderHandle(sliderWidth: width,
                                   sliderHeight: height,
                                   sliderValueStart: valueStart,
                                   sliderValueEnd: valueEnd,
                                   startPercentage: _highHandleStartPercentage
         )
         
-        midHandle = SliderHandle(sliderWidth: width,
-                                  sliderHeight: height,
-                                  sliderValueStart: valueStart,
-                                  sliderValueEnd: valueEnd,
-                                  startPercentage: _midHandleStartPercentage
+        midHandle = ResultsSliderHandle(sliderWidth: width,
+                                 sliderHeight: height,
+                                 sliderValueStart: valueStart,
+                                 sliderValueEnd: valueEnd,
+                                 startPercentage: _midHandleStartPercentage
         )
         
-        lowHandle = SliderHandle(sliderWidth: width,
+        lowHandle = ResultsSliderHandle(sliderWidth: width,
                                  sliderHeight: height,
                                  sliderValueStart: valueStart,
                                  sliderValueEnd: valueEnd,
@@ -172,8 +182,8 @@ class CustomSliderViewModel: ObservableObject {
 
 
 
-struct SliderView: View {
-    @ObservedObject var slider: CustomSliderViewModel
+struct ResultsSliderView: View {
+    @ObservedObject var slider: ResultsSliderViewModel
     
     var body: some View {
         RoundedRectangle(cornerRadius: slider.height)
@@ -182,26 +192,26 @@ struct SliderView: View {
             .overlay(
                 ZStack {
                     //Path between both handles
-                    SliderPathBetweenView(slider: slider)
+                    ResultsSliderPathBetweenView(slider: slider)
                     
                     //Low Handle
-                    SliderHandleView(handle: slider.lowHandle)
-//                        .highPriorityGesture(slider.lowHandle.sliderDragGesture)
+                    ResultsSliderHandleView(handle: slider.lowHandle)
+                    //                        .highPriorityGesture(slider.lowHandle.sliderDragGesture)
                     
                     //Low Handle
-                    MidSliderHandleView(handle: slider.midHandle)
+                    ResultsMidSliderHandleView(handle: slider.midHandle)
                         .highPriorityGesture(slider.midHandle.sliderDragGesture)
                     
                     //High Handle
-                    SliderHandleView(handle: slider.highHandle)
-//                        .highPriorityGesture(slider.highHandle.sliderDragGesture)
+                    ResultsSliderHandleView(handle: slider.highHandle)
+                    //                        .highPriorityGesture(slider.highHandle.sliderDragGesture)
                 }
             )
     }
 }
 
-struct MidSliderHandleView: View {
-    @ObservedObject var handle: SliderHandle
+struct ResultsMidSliderHandleView: View {
+    @ObservedObject var handle: ResultsSliderHandle
     
     var body: some View {
         PointedRectangle()
@@ -213,8 +223,8 @@ struct MidSliderHandleView: View {
     }
 }
 
-struct SliderHandleView: View {
-    @ObservedObject var handle: SliderHandle
+struct ResultsSliderHandleView: View {
+    @ObservedObject var handle: ResultsSliderHandle
     
     var body: some View {
         Rectangle()
@@ -226,8 +236,8 @@ struct SliderHandleView: View {
     }
 }
 
-struct SliderPathBetweenView: View {
-    @ObservedObject var slider: CustomSliderViewModel
+struct ResultsSliderPathBetweenView: View {
+    @ObservedObject var slider: ResultsSliderViewModel
     
     var body: some View {
         Path { path in

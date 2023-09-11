@@ -14,6 +14,10 @@
 		A96FA84A2AA39CE600FB205D /* MealType+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = A96FA8492AA39CE600FB205D /* MealType+CoreDataClass.swift */; };
 		A96FA84C2AA39D0900FB205D /* Day+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = A96FA84B2AA39D0900FB205D /* Day+CoreDataClass.swift */; };
 		A99E335C2AADFB47002656A7 /* PenaltiesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A99E335B2AADFB47002656A7 /* PenaltiesView.swift */; };
+		A99E335E2AAE37BD002656A7 /* ShowResultSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = A99E335D2AAE37BD002656A7 /* ShowResultSlider.swift */; };
+		A99E33602AAE3845002656A7 /* ResultsSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = A99E335F2AAE3845002656A7 /* ResultsSlider.swift */; };
+		A99E33622AAE3B6C002656A7 /* UIScreenExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A99E33612AAE3B6C002656A7 /* UIScreenExtensions.swift */; };
+		A99E33642AAE415A002656A7 /* ZoomModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = A99E33632AAE415A002656A7 /* ZoomModifier.swift */; };
 		A99EF2882A9F8A5300FC0140 /* CounterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A99EF2872A9F8A5300FC0140 /* CounterView.swift */; };
 		A99EF28A2AA0821E00FC0140 /* CoreDataExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A99EF2892AA0821E00FC0140 /* CoreDataExtensions.swift */; };
 		A99EF28C2AA094E700FC0140 /* ButtonStyles.swift in Sources */ = {isa = PBXBuildFile; fileRef = A99EF28B2AA094E700FC0140 /* ButtonStyles.swift */; };
@@ -58,6 +62,10 @@
 		A96FA8492AA39CE600FB205D /* MealType+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "MealType+CoreDataClass.swift"; sourceTree = "<group>"; };
 		A96FA84B2AA39D0900FB205D /* Day+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Day+CoreDataClass.swift"; sourceTree = "<group>"; };
 		A99E335B2AADFB47002656A7 /* PenaltiesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PenaltiesView.swift; path = Foodintake/PenaltiesView.swift; sourceTree = "<group>"; };
+		A99E335D2AAE37BD002656A7 /* ShowResultSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowResultSlider.swift; sourceTree = "<group>"; };
+		A99E335F2AAE3845002656A7 /* ResultsSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultsSlider.swift; sourceTree = "<group>"; };
+		A99E33612AAE3B6C002656A7 /* UIScreenExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIScreenExtensions.swift; sourceTree = "<group>"; };
+		A99E33632AAE415A002656A7 /* ZoomModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZoomModifier.swift; sourceTree = "<group>"; };
 		A99EF2872A9F8A5300FC0140 /* CounterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CounterView.swift; sourceTree = "<group>"; };
 		A99EF2892AA0821E00FC0140 /* CoreDataExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataExtensions.swift; sourceTree = "<group>"; };
 		A99EF28B2AA094E700FC0140 /* ButtonStyles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonStyles.swift; sourceTree = "<group>"; };
@@ -108,6 +116,10 @@
 		A9DCA71E2A9251AE00B6CC1B = {
 			isa = PBXGroup;
 			children = (
+				A99E33632AAE415A002656A7 /* ZoomModifier.swift */,
+				A99E33612AAE3B6C002656A7 /* UIScreenExtensions.swift */,
+				A99E335F2AAE3845002656A7 /* ResultsSlider.swift */,
+				A99E335D2AAE37BD002656A7 /* ShowResultSlider.swift */,
 				A99E335B2AADFB47002656A7 /* PenaltiesView.swift */,
 				A948A9082AA668340053EB77 /* ShapeExtensions.swift */,
 				A9DCA7292A9251AE00B6CC1B /* Foodintake */,
@@ -309,13 +321,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				A99EF28C2AA094E700FC0140 /* ButtonStyles.swift in Sources */,
+				A99E33622AAE3B6C002656A7 /* UIScreenExtensions.swift in Sources */,
 				A99EF28A2AA0821E00FC0140 /* CoreDataExtensions.swift in Sources */,
 				A96FA84A2AA39CE600FB205D /* MealType+CoreDataClass.swift in Sources */,
 				A96FA8482AA39BFA00FB205D /* MealType+CoreDataProperties.swift in Sources */,
 				A96FA84C2AA39D0900FB205D /* Day+CoreDataClass.swift in Sources */,
+				A99E33602AAE3845002656A7 /* ResultsSlider.swift in Sources */,
 				A99E335C2AADFB47002656A7 /* PenaltiesView.swift in Sources */,
 				A948A9092AA668340053EB77 /* ShapeExtensions.swift in Sources */,
 				A9DCA7342A9251B000B6CC1B /* Persistence.swift in Sources */,
+				A99E335E2AAE37BD002656A7 /* ShowResultSlider.swift in Sources */,
+				A99E33642AAE415A002656A7 /* ZoomModifier.swift in Sources */,
 				A9AB6FBC2AA5F6C60056C484 /* ColorExtension.swift in Sources */,
 				A9AA665C2A9F313C00D3378E /* SettingsView.swift in Sources */,
 				A9DCA75E2A9277FF00B6CC1B /* MealsDefaults.swift in Sources */,

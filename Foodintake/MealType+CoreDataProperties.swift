@@ -9,6 +9,18 @@
 import Foundation
 import CoreData
 
+protocol MealTypeType {
+    
+    // Properties
+    var daily: Int16 { get set }
+    var max: Int16 { get set }
+    var min: Int16 { get set }
+    var name: String? { get set }
+    var count: Int16 { get set }
+    var time: Date? { get set }
+    var day: Day? { get set }
+}
+
 
 extension MealType {
 

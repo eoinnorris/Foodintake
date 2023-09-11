@@ -17,10 +17,13 @@ struct PenaltyValueType {
     let value:Int
     let direction:Direction
     
+    func hasValue() -> Bool {
+        value > 0
+    }
 }
 
 enum PointsType {
-    case total
+    case reward
     case penaltyAboveCriteria
     case penaltyBelowCriteria
     case awardAboveCriteria
@@ -28,21 +31,44 @@ enum PointsType {
 }
 
 class PenaltiesViewModel: ObservableObject {
-    var total: Int = 10
-    var negativeAbove: PenaltyValueType = .init(value: 10, direction: .negative)
+    var reward: Int = 10
+    var negativeAbove: PenaltyValueType = .init(value: 8, direction: .negative)
     var positiveAbove: PenaltyValueType = .init(value: 0, direction: .positive)
-    var negativeBelow: PenaltyValueType = .init(value: 5, direction: .negative)
-    var positiveBelow: PenaltyValueType = .init(value: 5, direction: .negative)
+    var negativeBelow: PenaltyValueType = .init(value: 0, direction: .negative)
+    var positiveBelow: PenaltyValueType = .init(value: 0, direction: .negative)
 
- 
     
     func validate() -> Bool {
         true
     }
     
+    //todo - either positive or negative up and down
+    func calculateScore(forDifference difference:Int) -> Int {
+        let total = reward
+        var result = 0
+        if difference == 0 { return total}
+        if difference < 0 {
+            if negativeBelow.hasValue() {
+                result = total - ( negativeBelow.value * abs(difference))
+            } else if positiveBelow.hasValue() {
+                result = total + ( positiveBelow.value * abs(difference))
+            }
+        }
+        
+        if difference > 0 {
+            if negativeAbove.hasValue() {
+                result = total - ( negativeAbove.value * abs(difference))
+            } else if positiveAbove.hasValue() {
+                result = total + ( positiveAbove.value * abs(difference))
+            }
+        }
+        
+        return result
+    }
+    
     func defaults(forType type:PointsType) -> Int {
         switch type {
-        case .total:
+        case .reward:
             return 10
         case .penaltyAboveCriteria:
             return 5
@@ -59,8 +85,8 @@ class PenaltiesViewModel: ObservableObject {
                      value:String) {
         let intValue = Int(value) ?? defaults(forType: type)
         switch type {
-        case .total:
-            total = intValue
+        case .reward:
+            reward = intValue
         case .penaltyAboveCriteria:
             negativeAbove = .init(value: intValue, direction: .positive)
         case .penaltyBelowCriteria:
@@ -74,11 +100,14 @@ class PenaltiesViewModel: ObservableObject {
 }
 
 struct PenaltyHeader: View {
-    
+    let mealType:MealTypeType
+
     var body: some View {
-        Text("Penalties for bread")
+        VStack {
+            Text("Penalties for \(mealType.name ?? "")")
                 .font(.title)
-        Text("Max units is 2 units")
+            Text("Max units is 2 units")
+        }
     }
 }
 
@@ -106,16 +135,58 @@ struct PenaltySettingItem: View {
     }
 }
 
+struct VisualResultsView: View {
+    
+    @StateObject var sliderViewModel: ResultsSliderViewModel = .init(start: 0.0, end: 10.0)
+    @ObservedObject var penaltiesViewModel:PenaltiesViewModel
+    let mealType:MealTypeType
+
+    private var units: String {
+        withAnimation {
+            "\(sliderViewModel.midHandle.intCurrentValue)"
+        }
+    }
+    
+    // get rid of midHandle
+    var score: Int {
+        let difference =  sliderViewModel.midHandle.intCurrentValue - Int(mealType.daily)
+        return penaltiesViewModel.calculateScore(forDifference: difference)
+    }
+
+    var body: some View {
+        VStack {
+            Text("Visual Results")
+                .font(.callout)
+            HStack {
+                Text("Consumed \(units) units of \(mealType.name ?? "")")
+                    .font(.caption)
+                    .padding(.top, 2)
+            }
+            ResultsSliderView(slider: sliderViewModel)
+                .padding(.top, 10)
+            HStack {
+                Text("Score: \(score)")
+                    .font(.title)
+                    .fontWeight(.semibold)
+                    .padding(.top, 30)
+                Spacer()
+            }.padding(.leading, 70)
+     
+        }
+    }
+}
+
 struct PenaltiesView: View {
     @StateObject private var penaltiesViewModel = PenaltiesViewModel()
+    let mealType:MealTypeType
     
     var body: some View {
         VStack(alignment: .center) {
-            PenaltyHeader()
-            
-            Form {
+            PenaltyHeader(mealType: mealType)
+                .padding()
+            Form{
                 Section(header: Text("Points awarded on meeting criteria")) {
-                    PenaltySettingItem(penaltiesViewModel: penaltiesViewModel, pointsType: .total)
+                    PenaltySettingItem(penaltiesViewModel: penaltiesViewModel, pointsType: .reward)
                 }
                 Section(header: Text("Points deducted for extra bread")) {
                     PenaltySettingItem(penaltiesViewModel: penaltiesViewModel, pointsType: .penaltyAboveCriteria )
@@ -130,12 +201,28 @@ struct PenaltiesView: View {
                     PenaltySettingItem(penaltiesViewModel: penaltiesViewModel, pointsType: .awardBelowCriteria )
                 }
             }
+            .frame(height: UIScreen.screenHeight * 0.6)
+            VisualResultsView(penaltiesViewModel: penaltiesViewModel,
+                              mealType: mealType)
+                .padding(.top, 5)
+            Spacer()
         }
     }
 }
 
 struct PenaltiesView_Previews: PreviewProvider {
     static var previews: some View {
-        PenaltiesView()
+        let mealType = TestMealType(daily: 2, max: 6, min: 0, name:"white bread",count: 0)
+        PenaltiesView(mealType: mealType)
     }
+}
+
+struct TestMealType:MealTypeType {
+    var daily: Int16
+    var max: Int16
+    var min: Int16
+    var name: String?
+    var count: Int16
+    var time: Date?
+    var day: Day?
 }
