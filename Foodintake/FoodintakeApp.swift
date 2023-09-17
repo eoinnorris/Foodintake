@@ -23,6 +23,10 @@ struct FoodintakeApp: App {
                         .tabItem {
                             Label("Charts", systemImage: "chart.xyaxis.line")
                         }
+                    PenaltyForm()
+                        .tabItem {
+                            Label("Category", systemImage: "rectangle.3.group.fill")
+                        }
                 }
             }
             .environment(\.managedObjectContext, persistenceController.container.viewContext)

@@ -38,26 +38,3 @@ extension View {
     }
 }
 
-/*struct ContentView: View {
- @State private var showContent = true
- 
- var body: some View {
- VStack(spacing: 20) {
- Button("Toggle Content") {
- showContent.toggle()
- }
- 
- Rectangle()
- .fill(Color.blue)
- .frame(width: 100, height: 100)
- .zoomOut(when: $showContent)
- }
- }
- }
- 
- struct ContentView_Previews: PreviewProvider {
- static var previews: some View {
- ContentView()
- }
- }
-*/

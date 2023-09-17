@@ -35,9 +35,10 @@ struct WelcomeView: View {
     }
         
     func lastDays(ofNumber number:Int) -> [Day] {
-        guard number > 0 else  {
+        guard number > 0, sortedDays.count > 0, number <  sortedDays.count-1 else {
             return []
         }
+      
         return Array(sortedDays[0...number-1])
     }
     
@@ -244,6 +245,8 @@ extension DailyView {
         for mealType in DefaultMealTypeEnum.allCases {
             
             let day = Day(context: viewContext)
+            let category = ItemCategory(context: viewContext)
+
             day.date = date
             day.daysSince1970 = Int32(DateHelper.daysSince1970(from: date, withLocale: Locale.current))
             
@@ -254,8 +257,10 @@ extension DailyView {
             newMealType.min =  Int16(mealType.minLimit)
             
             day.addToMeals(newMealType)
-            
+            category.addToItems(newMealType)
+            category.name = "Food"
             newMealType.day = day
+            newMealType.category = category
             
             // Save the context
             do {

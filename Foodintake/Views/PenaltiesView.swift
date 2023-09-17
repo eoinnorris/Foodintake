@@ -100,11 +100,11 @@ class PenaltiesViewModel: ObservableObject {
 }
 
 struct PenaltyHeader: View {
-    let mealType:MealTypeType
+    let mealType:MealType
 
     var body: some View {
         VStack {
-            Text("Penalties for \(mealType.name ?? "")")
+            Text("Penalties for \(mealType.actualName)")
                 .font(.title)
             Text("Max units is 2 units")
         }
@@ -146,7 +146,7 @@ struct VisualResultsView: View {
     
     @StateObject var sliderViewModel: ResultsSliderViewModel = .init(start: 0.0, end: 10.0)
     @ObservedObject var penaltiesViewModel:PenaltiesViewModel
-    let mealType:MealTypeType
+    let mealType:MealType
 
     private var units: String {
         withAnimation {
@@ -191,7 +191,7 @@ struct VisualResultsView: View {
 
 struct PenaltiesView: View {
     @StateObject private var penaltiesViewModel = PenaltiesViewModel()
-    let mealType:MealTypeType
+    let mealType:MealType
     
     var body: some View {
         VStack(alignment: .center) {
@@ -223,14 +223,7 @@ struct PenaltiesView: View {
     }
 }
 
-struct PenaltiesView_Previews: PreviewProvider {
-    static var previews: some View {
-        let mealType = TestMealType(daily: 2, max: 6, min: 0, name:"white bread",count: 0)
-        PenaltiesView(mealType: mealType)
-    }
-}
-
-struct TestMealType:MealTypeType {
+struct TestMealType:MealProtocol {
     var daily: Int16
     var max: Int16
     var min: Int16
@@ -238,4 +231,15 @@ struct TestMealType:MealTypeType {
     var count: Int16
     var time: Date?
     var day: Day?
+}
+
+
+protocol MealProtocol {
+    var daily: Int16 { get set }
+    var max: Int16 { get set }
+    var min: Int16 { get set }
+    var name: String? { get set }
+    var count: Int16 { get set }
+    var time: Date? { get set }
+    var day: Day? { get set }
 }

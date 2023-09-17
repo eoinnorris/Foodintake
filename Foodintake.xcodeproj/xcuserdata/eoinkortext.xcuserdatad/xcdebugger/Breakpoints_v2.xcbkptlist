@@ -100,5 +100,53 @@
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "12A2DF91-B0B9-4477-BDAB-2536AE3FA803"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Foodintake/Views/DailyView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "245"
+            endingLineNumber = "245"
+            landmarkName = "saveDefaultMealTypes(for:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "12A2DF91-B0B9-4477-BDAB-2536AE3FA803 - 449da1cf3b179f5c"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Foodintake.DailyView.saveDefaultMealTypes(for: Foundation.Date) -&gt; ()"
+                  moduleName = "Foodintake"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/eoinkortext/Projects/FoodIntake/Foodintake/Foodintake/Views/DailyView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "250"
+                  endingLineNumber = "250"
+                  offsetFromSymbolStart = "996">
+               </Location>
+               <Location
+                  uuid = "12A2DF91-B0B9-4477-BDAB-2536AE3FA803 - 449da1cf3b1798fb"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Foodintake.DailyView.saveDefaultMealTypes(for: Foundation.Date) -&gt; ()"
+                  moduleName = "Foodintake"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/eoinkortext/Projects/FoodIntake/Foodintake/Foodintake/Views/DailyView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "245"
+                  endingLineNumber = "245"
+                  offsetFromSymbolStart = "308">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
    </Breakpoints>
 </Bucket>
