@@ -23,7 +23,7 @@ struct PenaltyForm: View {
         NavigationStack{
             Form {
                 ForEach(namedCategories, id:\.self) { category in
-                    NavigationLink(category.actualName) {
+                    NavigationLink(category.capitalisedName) {
                         PenaltyFoodForm(selectedCategory: category)
                     }
                 }
@@ -39,7 +39,7 @@ struct PenaltyFoodForm: View {
         NavigationStack{
             Form {
                 ForEach(selectedCategory.uniqueMealTypes) { mealType in
-                    NavigationLink(mealType.actualName) {
+                    NavigationLink(mealType.capitalisedName) {
                         PenaltiesView(mealType: mealType)
                     }
              }
@@ -49,39 +49,7 @@ struct PenaltyFoodForm: View {
 }
 
 
-extension ItemCategory {
-    
-    var uniqueMealTypes: [MealType] {
-        var seenNames = Set<String>()
-        let types = self.mealTypes
-        return types.filter { type in
-            if seenNames.contains(type.actualName) {
-                return false
-            } else {
-                seenNames.insert(type.actualName)
-                return true
-            }
-        }.sorted {$0.actualName < $1.actualName}
-    }
-    
-    
-    var mealTypes:[MealType] {
-        if let mealTypes = self.items?.allObjects as? [MealType] {
-            return mealTypes
-        }
-        return []
-    }
-    
-    var actualName: String {
-        name ?? ""
-    }
-}
 
-extension MealType {
-    var actualName: String {
-        name ?? ""
-    }
-}
 
 
 struct PenaltyForm_Previews: PreviewProvider {

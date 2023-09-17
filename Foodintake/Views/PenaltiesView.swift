@@ -104,7 +104,7 @@ struct PenaltyHeader: View {
 
     var body: some View {
         VStack {
-            Text("Penalties for \(mealType.actualName)")
+            Text("Penalties for \(mealType.capitalisedName)")
                 .font(.title)
             Text("Max units is 2 units")
         }
@@ -221,25 +221,4 @@ struct PenaltiesView: View {
             Spacer()
         }
     }
-}
-
-struct TestMealType:MealProtocol {
-    var daily: Int16
-    var max: Int16
-    var min: Int16
-    var name: String?
-    var count: Int16
-    var time: Date?
-    var day: Day?
-}
-
-
-protocol MealProtocol {
-    var daily: Int16 { get set }
-    var max: Int16 { get set }
-    var min: Int16 { get set }
-    var name: String? { get set }
-    var count: Int16 { get set }
-    var time: Date? { get set }
-    var day: Day? { get set }
 }
