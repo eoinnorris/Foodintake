@@ -10,6 +10,14 @@
             </uniquenessConstraint>
         </uniquenessConstraints>
     </entity>
+    <entity name="ItemCategory" representedClassName="ItemCategory" syncable="YES">
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <uniquenessConstraints>
+            <uniquenessConstraint>
+                <constraint value="name"/>
+            </uniquenessConstraint>
+        </uniquenessConstraints>
+    </entity>
     <entity name="MealType" representedClassName="MealType" syncable="YES">
         <attribute name="count" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="daily" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>

@@ -135,6 +135,13 @@ struct PenaltySettingItem: View {
     }
 }
 
+extension VisualResultsView {
+    
+    func resetToDefaults() {
+        return
+    }
+}
+
 struct VisualResultsView: View {
     
     @StateObject var sliderViewModel: ResultsSliderViewModel = .init(start: 0.0, end: 10.0)
@@ -171,7 +178,13 @@ struct VisualResultsView: View {
                     .padding(.top, 30)
                 Spacer()
             }.padding(.leading, 70)
-     
+            Spacer()
+            Button(role: .destructive) {
+                resetToDefaults()
+            } label: {
+                Text("Reset")
+            }
+
         }
     }
 }

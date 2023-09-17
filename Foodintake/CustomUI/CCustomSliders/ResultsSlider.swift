@@ -198,13 +198,10 @@ struct ResultsSliderView: View {
                     ResultsSliderHandleView(handle: slider.lowHandle)
                     //                        .highPriorityGesture(slider.lowHandle.sliderDragGesture)
                     
-                    //Low Handle
+                    //mid Handle
                     ResultsMidSliderHandleView(handle: slider.midHandle)
                         .highPriorityGesture(slider.midHandle.sliderDragGesture)
                     
-                    //High Handle
-                    ResultsSliderHandleView(handle: slider.highHandle)
-                    //                        .highPriorityGesture(slider.highHandle.sliderDragGesture)
                 }
             )
     }
