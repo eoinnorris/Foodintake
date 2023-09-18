@@ -27,7 +27,7 @@ struct PenaltyForm: View {
                         PenaltyFoodForm(selectedCategory: category)
                     }
                 }
-            }
+            }						
         }
     }
 }

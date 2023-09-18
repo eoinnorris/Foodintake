@@ -201,16 +201,16 @@ struct PenaltiesView: View {
                 Section(header: Text("Points awarded on meeting criteria")) {
                     PenaltySettingItem(penaltiesViewModel: penaltiesViewModel, pointsType: .reward)
                 }
-                Section(header: Text("Points deducted for extra bread")) {
+                Section(header: Text("Points deducted for extra \(mealType.capitalisedName)")) {
                     PenaltySettingItem(penaltiesViewModel: penaltiesViewModel, pointsType: .penaltyAboveCriteria )
                 }
-                Section(header: Text("Points awarded for extra bread")) {
+                Section(header: Text("Points awarded for extra \(mealType.capitalisedName)")) {
                     PenaltySettingItem(penaltiesViewModel: penaltiesViewModel, pointsType: .awardAboveCriteria )
                 }
                 Section(header: Text("Points deducted for not reaching target")) {
                     PenaltySettingItem(penaltiesViewModel: penaltiesViewModel, pointsType: .penaltyBelowCriteria)
                 }
-                Section(header: Text("Points awarded for eating less bread")) {
+                Section(header: Text("Points awarded for eating less \(mealType.capitalisedName)")) {
                     PenaltySettingItem(penaltiesViewModel: penaltiesViewModel, pointsType: .awardBelowCriteria )
                 }
             }

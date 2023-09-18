@@ -242,7 +242,7 @@ extension DailyView {
     
     private func saveDefaultMealTypes(for date:Date) {
         // Enumerate the DefaultMealTypeEnum
-        for mealType in DefaultMealTypeEnum.allCases {
+            for mealType in DefaultMealTypeEnum.allCases {
             
             let day = Day(context: viewContext)
             let category = ItemCategory(context: viewContext)
