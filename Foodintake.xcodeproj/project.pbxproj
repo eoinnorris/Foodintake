@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		A948A9092AA668340053EB77 /* ShapeExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A948A9082AA668340053EB77 /* ShapeExtensions.swift */; };
+		A94AF3332ABDC15C00EBA8FC /* TestForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = A94AF3322ABDC15C00EBA8FC /* TestForm.swift */; };
 		A96FA82A2AA21F7C00FB205D /* CustomSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = A96FA8292AA21F7C00FB205D /* CustomSlider.swift */; };
 		A96FA8472AA39BFA00FB205D /* Day+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = A96FA8452AA39BFA00FB205D /* Day+CoreDataProperties.swift */; };
 		A96FA84A2AA39CE600FB205D /* MealType+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = A96FA8492AA39CE600FB205D /* MealType+CoreDataClass.swift */; };
@@ -58,6 +59,7 @@
 
 /* Begin PBXFileReference section */
 		A948A9082AA668340053EB77 /* ShapeExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShapeExtensions.swift; sourceTree = "<group>"; };
+		A94AF3322ABDC15C00EBA8FC /* TestForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TestForm.swift; path = Foodintake/Views/TestForm.swift; sourceTree = "<group>"; };
 		A96FA8292AA21F7C00FB205D /* CustomSlider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomSlider.swift; sourceTree = "<group>"; };
 		A96FA8452AA39BFA00FB205D /* Day+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Day+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		A96FA8492AA39CE600FB205D /* MealType+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "MealType+CoreDataClass.swift"; sourceTree = "<group>"; };
@@ -200,6 +202,7 @@
 		A9DCA71E2A9251AE00B6CC1B = {
 			isa = PBXGroup;
 			children = (
+				A94AF3322ABDC15C00EBA8FC /* TestForm.swift */,
 				A9DCA7292A9251AE00B6CC1B /* Foodintake */,
 				A9DCA73F2A9251B000B6CC1B /* FoodintakeTests */,
 				A9DCA7492A9251B000B6CC1B /* FoodintakeUITests */,
@@ -409,6 +412,7 @@
 				A96FA8472AA39BFA00FB205D /* Day+CoreDataProperties.swift in Sources */,
 				A9DCA75A2A92526E00B6CC1B /* DailyView.swift in Sources */,
 				A9AA665E2A9F315900D3378E /* ChartView.swift in Sources */,
+				A94AF3332ABDC15C00EBA8FC /* TestForm.swift in Sources */,
 				A9D0DFEC2AB73D22001C32A3 /* MealType+CoreDataProperties.swift in Sources */,
 				A96FA82A2AA21F7C00FB205D /* CustomSlider.swift in Sources */,
 				A9DCA75C2A9267AA00B6CC1B /* DateHelper.swift in Sources */,

@@ -10,11 +10,24 @@ import SwiftUI
 @main
 struct FoodintakeApp: App {
     let persistenceController = PersistenceController.shared
-
+    
+ 
+    
+    
+    func getViewModel() -> CategoriesViewModel {
+        let categories = Category.generateSampleCategories()
+        return CategoriesViewModel(categories: categories)
+    }
+    
+    
     var body: some Scene {
         WindowGroup {
             NavigationStack {
             TabView {
+                    CategoriesView(viewModel: getViewModel())
+                    .tabItem {
+                        Label("Test", systemImage: "square")
+                    }
                     DailyView()
                         .tabItem {
                             Label("Today", systemImage: "calendar.day.timeline.left")
